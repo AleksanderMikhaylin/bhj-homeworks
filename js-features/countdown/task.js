@@ -1,12 +1,12 @@
-const counterDown = function () {
-  const timerElement = document.getElementById("timer");
-  let timer = Number(timerElement.textContent);
-  
-    timer -= 1;
-    if (timer <= 0) {
-        alert('Вы победили в конкурсе!');
-        clearInterval(inervalId);
+const addText = function () {
+    const timerId = document.getElementById("timer");
+    timerId.textContent -= 1;
+    if (timerId.textContent <= 0) {
+		timerId.textContent = "";
+		const statusId = document.getElementById("status");
+		statusId.textContent = "Конкурс завершен";
+        alert('Вы выиграли');
+        clearInterval(inervalID);
     }
 }
-
-const inervalId = setInterval(counterDown, 1000);
+const inervalID = setInterval(addText, 1000);
