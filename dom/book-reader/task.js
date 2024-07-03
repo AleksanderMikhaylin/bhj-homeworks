@@ -10,7 +10,7 @@ let carrentData = {
 
 function getCarrentClassName(event) {
 	
-	let carrentClassName = 'book';
+	let carrentLocalClassName = 'book';
 	
 	activeElement = event.target;
 	parentElement = activeElement.parentElement;
@@ -19,11 +19,11 @@ function getCarrentClassName(event) {
 	
 	for (const key in carrentData) {
 		if (carrentData[key]['key'] !== undefined) {
-			carrentClassName = carrentClassName + ' ' + carrentData[key]['className'] + carrentData[key]['key'];
+			carrentLocalClassName = carrentLocalClassName + ' ' + carrentData[key]['className'] + carrentData[key]['key'];
 		}
 	}
 	
-	return carrentClassName;	
+	return carrentLocalClassName;	
 }
 	
 controlElements.addEventListener("click", function (event) {
