@@ -2,25 +2,32 @@ const bookElement = document.getElementById("book");
 const controlElements = document.querySelector(".book__controls");
 
 let carrentClassName = 'book';
+
 let carrentData = {
 	'book__control_font-size': {'key': undefined, 'dataset': 'size', 'className': 'book_fs-'},
 	'book__control_color': {'key': undefined, 'dataset': 'textColor', 'className': 'book_color-'},
 	'book__control_background': {'key': undefined, 'dataset': 'bgColor', 'className': 'book_bg-'},
 	}
 
-function getCarrentClassName(event) {
+function getCarrentClassName(event, preview = false) {
 	
 	let carrentLocalClassName = 'book';
+	let carrentLocalData = structuredClone(carrentData);
+	
 	
 	activeElement = event.target;
 	parentElement = activeElement.parentElement;
 	
-	carrentData[parentElement.classList[1]]['key'] = activeElement.dataset[carrentData[parentElement.classList[1]]['dataset']];
+	carrentLocalData[parentElement.classList[1]]['key'] = activeElement.dataset[carrentLocalData[parentElement.classList[1]]['dataset']];
 	
 	for (const key in carrentData) {
-		if (carrentData[key]['key'] !== undefined) {
-			carrentLocalClassName = carrentLocalClassName + ' ' + carrentData[key]['className'] + carrentData[key]['key'];
+		if (carrentLocalData[key]['key'] !== undefined) {
+			carrentLocalClassName = carrentLocalClassName + ' ' + carrentLocalData[key]['className'] + carrentLocalData[key]['key'];
 		}
+	}
+	
+	if (!preview) {
+		carrentData = carrentLocalData;
 	}
 	
 	return carrentLocalClassName;	
@@ -32,21 +39,26 @@ controlElements.addEventListener("click", function (event) {
 	
 	activeList = parentElement.querySelectorAll("a");
 	
-	activeList.forEach((element, ) => {
+	activeList.forEach((element) => {
 		 element.classList.remove(element.classList[0] + "_active");
 		 });
 	activeElement.classList.add(activeElement.classList[0] + '_active');
 	
 	carrentClassName = getCarrentClassName(event);
 	bookElement.className = carrentClassName;
+	console.log(bookElement.className);
 	
 }
 );
 
-controlElements.addEventListener("mouseover", function (event) {
-	
-	bookElement.className = getCarrentClassName(event);
-}
+controlElements.addEventListener("mouseover", (event) => {
+	event.preventDefault();
+	bookElement.className = getCarrentClassName(event, true)
+	}
 );
 
-controlElements.addEventListener("mouseout", () => {bookElement.className = carrentClassName});
+controlElements.addEventListener("mouseout", () => {
+	event.preventDefault();
+	bookElement.className = carrentClassName;
+	}
+);
