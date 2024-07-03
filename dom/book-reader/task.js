@@ -1,6 +1,6 @@
 
 const bookElement = document.getElementById("book");
-const controlElements = document.querySelector(".book__control");
+const controlElements = document.querySelector(".book__controls");
 
 controlElements.addEventListener("click", function (event) {
 	
