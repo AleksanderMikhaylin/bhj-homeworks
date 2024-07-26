@@ -1,5 +1,5 @@
 let xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://netology-slow-rest.herokuapp.com');
+xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/slow-get-courses');
 xhr.send();  
 xhr.addEventListener('readystatechange', function() {
     if(xhr.readyState == 4 && xhr.status === 200) {
